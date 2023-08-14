@@ -13,7 +13,8 @@ import {
 
 const InterviewDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
-}> = ({ handleTab }) => {
+  handleInterviewValues: (values: IInterViewSettings) => void;
+}> = ({ handleTab, handleInterviewValues }) => {
   const {
     errors,
     touched,
@@ -41,6 +42,7 @@ const InterviewDetailsForm: React.FC<{
       alert("Form successfully submitted");
     },
   });
+  handleInterviewValues(values);
 
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>

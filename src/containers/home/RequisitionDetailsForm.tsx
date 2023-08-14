@@ -10,7 +10,8 @@ import { genderOptions, urgencyOptions } from "./constants";
 
 const RequisitionDetailsForm: React.FC<{
   handleTab: (n: PageNumbers) => void;
-}> = ({ handleTab }) => {
+  handleRequisitionValues: (values: IRequisitionDetails) => void;
+}> = ({ handleTab, handleRequisitionValues }) => {
   const {
     handleChange,
     errors,
@@ -42,7 +43,7 @@ const RequisitionDetailsForm: React.FC<{
       handleTab(1);
     },
   });
-
+  handleRequisitionValues(values);
   return (
     <Box width="100%" as="form" onSubmit={handleSubmit as any}>
       <Box width="100%">
@@ -65,6 +66,7 @@ const RequisitionDetailsForm: React.FC<{
           value={values?.noOfOpenings}
           error={errors?.noOfOpenings}
           touched={touched?.noOfOpenings}
+          type="number"
         />
         <FormSelect
           label="Gender"
