@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@chakra-ui/react";
 import FromWrapper from "./FormWrapper";
 import { IFormInputProps } from "@src/interface/forms";
@@ -28,6 +28,14 @@ const FormSelect: React.FC<IFormSelectProps> = ({
   options,
 }) => {
   const theme = useTheme();
+  const [menuPortalTarget, setMenuPortalTarget] = useState<HTMLElement | null>(
+    null
+  );
+
+  // Use useEffect hook to set the menu portal target to document.body after mounting
+  useEffect(() => {
+    setMenuPortalTarget(document.body);
+  }, []);
 
   const handleChange = (value: any) => {
     onChange && onChange(name, value?.value);
@@ -52,7 +60,7 @@ const FormSelect: React.FC<IFormSelectProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         options={options}
-        menuPortalTarget={document.querySelector("body")}
+        menuPortalTarget={menuPortalTarget}
         menuPosition={"fixed"}
         // styles
         styles={{
